@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WindBorne Systems Application Challenge | Chaturya Ganne</title>
+<meta name="description" content=" My answers to the WindBorne Systems application challenge. M.S. candidate in Applied Machine Learning at the University of Maryland.">
+<style>
+  :root {
+    --paper: #eef2f5;
+    --surface: #ffffff;
+    --ink: #14202b;
+    --muted: #4f6070;
+    --line: #c9d4dd;
+    --accent: #1f5f99;
+    --accent-ink: #ffffff;
+    --serif: Georgia, "Iowan Old Style", "Times New Roman", serif;
+    --sans: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #0f1a24;
+      --surface: #16232f;
+      --ink: #e6edf3;
+      --muted: #9fb0bf;
+      --line: #2b3d4d;
+      --accent: #6db3f2;
+      --accent-ink: #0f1a24;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: 1.125rem;
+    line-height: 1.7;
+  }
+  a { color: var(--accent); text-underline-offset: 3px; }
+  a:focus-visible, .btn:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+  .wrap { max-width: 44rem; margin: 0 auto; padding: 0 1.25rem; }
+
+  header { padding: 4rem 0 2.5rem; border-bottom: 1px solid var(--line); }
+  header h1 {
+    font-family: var(--sans);
+    font-size: clamp(2.25rem, 7vw, 3.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    margin: 0 0 0.5rem;
+  }
+  .role { font-family: var(--sans); color: var(--muted); margin: 0 0 1.75rem; font-size: 1.05rem; }
+  .links { display: flex; flex-wrap: wrap; gap: 0.75rem; padding: 0; margin: 0; list-style: none; font-family: var(--sans); }
+  .btn {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--accent);
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--accent);
+  }
+  .btn:hover { background: var(--accent); color: var(--accent-ink); }
+
+  .intro { padding: 2.5rem 0 0.5rem; }
+  .intro h2 { font-family: var(--sans); font-size: 1.1rem; margin: 0 0 0.25rem; color: var(--muted); font-weight: 600; }
+  .intro p { margin: 0; font-size: 1.05rem; color: var(--muted); }
+
+  main { padding: 1rem 0 4rem; }
+  article { padding: 2.25rem 0; border-bottom: 1px solid var(--line); }
+  article:last-child { border-bottom: 0; }
+  article h3 {
+    font-family: var(--sans);
+    font-size: 1.2rem;
+    line-height: 1.35;
+    margin: 0 0 1rem;
+    padding-left: 1rem;
+    border-left: 4px solid var(--accent);
+  }
+  article p { margin: 0; }
+
+  footer { padding: 2rem 0 3rem; border-top: 1px solid var(--line); font-family: var(--sans); color: var(--muted); font-size: 0.95rem; }
+
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  @media (max-width: 480px) {
+    body { font-size: 1.05rem; }
+    header { padding-top: 2.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <h1>Chaturya Ganne</h1>
+    <p class="role">M.S. Candidate in Applied Machine Learning, University of Maryland</p>
+    <ul class="links">
+      <li><a class="btn" href="https://drive.google.com/file/d/1culdLdIt2dcB3LoYQirhkwnTC49KH0hs/view?usp=sharing">Resume (PDF)</a></li>
+      <li><a class="btn" href="https://github.com/chaturyaganne">GitHub</a></li>
+      <li><a class="btn" href="https://www.linkedin.com/in/chaturyaganne-6b85a7178">LinkedIn</a></li>
+    </ul>
+  </div>
+</header>
+
+<div class="wrap">
+  <section class="intro">
+    <h2>WindBorne Systems Application Challenge</h2>
+    <p>Five questions, five answers. Each one points to work I built.</p>
+  </section>
+
+  <main>
+    <article>
+      <h3>1. Tell us about a problem you couldn’t leave alone. What did you build to fix it?</h3>
+      <p>In Intensity-Modulated Radiation Therapy (IMRT) planning, balancing precise tumor radiation coverage against non-target organ safety creates computationally prohibitive optimization problems. Standard nuclear-norm minimization techniques for constraining fluence-matrix ranks were too memory-intensive for large clinical datasets like PortPy. I couldn't leave this efficiency trade-off unresolved, so I designed a convex optimization pipeline that introduced a novel spectral regularizer as a computationally lightweight surrogate for nuclear-norm constraints. Formulated using CVXPY on PortPy clinical datasets, this method strictly enforced critical clinical dose bounds (PTV ≥60 Gy, esophagus ≤45 Gy, spinal cord ≤30 Gy) while significantly reducing matrix rank and memory overhead without degrading beamlet quality or plan delivery safety.</p>
+    </article>
+
+    <article>
+      <h3>2. Tell us about a time you had to understand an unfamiliar system that wasn’t behaving as expected. How did you get to the bottom of it?</h3>
+      <p>During my internship at Daiichi Sankyo, I built an enterprise Master Data Management (MDM) tool combining OpenSearch vector retrieval, Neo4j graph storage, and LLM candidate matching to resolve entity relationships across massive pharmaceutical datasets. During pipeline execution, candidate generation began silently dropping obvious entity matches. Instead of making blind code changes, I systematically investigated the data boundary. I traced the query vectors directly inside OpenSearch indices to evaluate distance metrics, then isolated the execution of Cypher graph traversal rules in Neo4j. By asking targeted questions about how entity canonical keys were being propagated during incremental updates, I pinpointed the root cause: edge cases in state propagation across disconnected graph clusters. Refactoring the Union-Find canonicalization logic resolved the issue and restored 100% graph lineage traceability.</p>
+    </article>
+
+    <article>
+      <h3>3. Describe a real coding task where AI tools helped you move faster. Where did you have to step in and think for yourself?</h3>
+      <p>When building AdaptAlloc, a contextual bandit framework designed to adaptively route video frames between YOLOv8 (low-energy) and RT-DETR (high-accuracy), I used AI tools to accelerate drafting PyTorch frame loaders, Docker container scripts, and Streamlit benchmarking dashboard boilerplate. However, human intervention was critical when engineering the 9-dimensional state vector (measuring Shannon entropy and detection confidence) and designing the REINFORCE policy reward function. Generative AI suggestions initially produced naive reward structures that maximized object detection accuracy while ignoring compute latency and frame rate degradation. I stepped in to mathematically define a customized multi-objective trade-off function balancing energy consumption, inference speed, and mAP, ensuring the policy learned real-world real-time performance constraints.</p>
+    </article>
+
+    <article>
+      <h3>4. Describe the extent to which you have experience with production systems.</h3>
+      <p>At Daiichi Sankyo, I architected and deployed production-grade Retrieval-Augmented Generation (RAG) pipelines using OpenSearch vector retrieval, hierarchical chunking, reranking models, and FastAPI backend microservices. The system automated document review across 2,000+ enterprise files, reducing review turnaround time by over 95% (from 2 weeks down to 4 hours) while maintaining strict context accuracy. My production experience spans containerizing workloads with Docker, building low-latency REST APIs, optimizing LLM inference costs, and deploying computer vision models in real-time inference environments.</p>
+    </article>
+
+    <article>
+      <h3>5. How many years of relevant experience do you have?</h3>
+      <p>I have 2 years of relevant software engineering and machine learning experience, including enterprise roles as a Global Development Information Management Intern at Daiichi Sankyo US and Data Science Intern at AwoneDataSciences, alongside graduate-level ML systems research at the University of Maryland, College Park.</p>
+    </article>
+  </main>
+</div>
+
+<footer>
+  <div class="wrap">Chaturya Ganne · <a href="mailto:chaturyaganne05@gmail.com">chaturyaganne05@gmail.com</a></div>
+</footer>
+
+</body>
+</html>
